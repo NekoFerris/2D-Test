@@ -1,0 +1,12 @@
+﻿<Window x:Class="_2D_Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_2D_Test"
+        mc:Ignorable="d"
+        Title="2D Test" Height="450" Width="800" ResizeMode="NoResize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
+    <Canvas x:Name="MyCanvas" Margin="3,0,-3,0">
+        <Ellipse x:Name="Kreis" Height="100" Fill="Black" Stroke="Black" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="0" Canvas.Top="0" Panel.ZIndex="1"/>
+    </Canvas>
+</Window>
