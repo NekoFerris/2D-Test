@@ -15,6 +15,7 @@ namespace _2D_Test
         UIElement selectedElement = null;
         private bool running = true;
         Vector velocity = new();
+        private double MaxSpeed = 5;
         Thread thread;
         Random r = new();
         public MainWindow()
@@ -39,20 +40,41 @@ namespace _2D_Test
                 {
                     if (pressedKeys[Key.Up] == true)
                     {
-                        direction.Y -= 1;
+                        velocity.Y -= 0.01;
+                    }
+                    else
+                    {
+                        if(velocity.Y < 0)
+                            velocity.Y += 0.01;
                     }
                     if (pressedKeys[Key.Down] == true)
                     {
-                        direction.Y += 1;
+                        velocity.Y += 0.01;
+                    }
+                    else
+                    {
+                        if (velocity.Y > 0)
+                            velocity.Y -= 0.01;
                     }
                     if (pressedKeys[Key.Left] == true)
                     {
-                        direction.X -= 1;
+                        velocity.X -= 0.01;
+                    }
+                    else
+                    {
+                        if (velocity.X < 0)
+                            velocity.X += 0.01;
                     }
                     if (pressedKeys[Key.Right] == true)
                     {
-                        direction.X += 1;
+                        velocity.X += 0.01;
                     }
+                    else
+                    {
+                        if (velocity.X > 0)
+                            velocity.X -= 0.01;
+                    }
+                    direction += velocity;
                     if (selectedElement != null)
                     {
                         Application.Current.Dispatcher.Invoke(() => Move(selectedElement, direction));
