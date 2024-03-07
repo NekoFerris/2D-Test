@@ -18,9 +18,11 @@ namespace _2D_Test
         private double MaxSpeed = 5;
         Thread thread;
         Random r = new();
+        GameObjectMananger GameObjectMananger;
         public MainWindow()
         {
             InitializeComponent();
+            GameObjectMananger = new(MyCanvas);
             pressedKeys.Add(Key.Up, false);
             pressedKeys.Add(Key.Down, false);
             pressedKeys.Add(Key.Left, false);
@@ -146,43 +148,11 @@ namespace _2D_Test
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Ellipse ellipse = new Ellipse();
-            ellipse.Width = r.Next(20, 81);
-            ellipse.Height = r.Next(20, 81);
-            ellipse.Fill = new SolidColorBrush(Color.FromRgb((byte)r.Next(0,255), (byte)r.Next(0, 255), (byte)r.Next(0, 255)));
-            double x = r.Next(0, (int)(MyCanvas.ActualWidth - ellipse.Width));
-            double y = r.Next(0, (int)(MyCanvas.ActualHeight - ellipse.Height));
-            ellipse.MouseLeftButtonUp += EllipseFocused;
-            MyCanvas.Children.Add(ellipse);
-            ellipse.StrokeThickness = 1;
-            Canvas.SetLeft(ellipse, x);
-            Canvas.SetTop(ellipse, y);
+            GameObjectMananger.AddMoveableObject(true);
         }
         private void btnRem_Click(object sender, RoutedEventArgs e)
         {
-            if(selectedElement != null)
-            {
-                selectedElement.MouseLeftButtonUp -= EllipseFocused;
-                MyCanvas.Children.Remove(selectedElement);
-            }
-        }
-
-        public void EllipseFocused(object sender, MouseEventArgs e)
-        {
-            if(selectedElement != null)
-            {
-                Canvas.SetZIndex(selectedElement, 0);
-                ((Ellipse)selectedElement).Stroke = Brushes.Transparent;
-            }
-            selectedElement = null;
-            if (sender != null)
-            {
-                selectedElement = (Ellipse)sender;
-                Canvas.SetZIndex(selectedElement, 1);
-                ((Ellipse)sender).Stroke = Brushes.Black;
-                ((Ellipse)sender).StrokeThickness = 1;
-                ((Ellipse)sender).Focus();
-            }
+            GameObjectMananger.RemoveMoveableObject();
         }
     }
 }
