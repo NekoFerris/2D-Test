@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2D_Test"
         mc:Ignorable="d"
-        Title="2D Test" Height="450" Width="800" ResizeMode="NoResize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
+        Title="2D Test" Height="720" Width="1280" ResizeMode="NoResize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
     <Grid>
-        <Canvas x:Name="MyCanvas" Margin="0,0,0,0"/>
-        <Button x:Name="btnAdd" Content="Hinzufügen" Canvas.Left="665" Canvas.Top="404" Margin="0,0,85,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="btnAdd_Click"/>
-        <Button x:Name="btnRem" Content="Entfernen" Canvas.Left="735" Canvas.Top="404" Margin="0,0,10,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="70" Click="btnRem_Click"/>
+        <Canvas x:Name="MyCanvas" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnAdd" Content="Hinzufügen" Margin="0,0,85,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="btnAdd_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnRem" Content="Entfernen" Margin="0,0,10,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="70" Click="btnRem_Click" Grid.Column="1"/>
     </Grid>
 </Window>

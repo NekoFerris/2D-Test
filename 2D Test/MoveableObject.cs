@@ -56,6 +56,8 @@ namespace _2D_Test
         }
         public void Move(Canvas GameCanvas, bool bounce)
         {
+            if (Velocity.Length == 0)
+                return;
             Position += Velocity;
             if(Position.Y < 0)
             {
