@@ -28,5 +28,20 @@ namespace _2D_Test
             Position.Y = y;
             UIElement = ellipse;
         }
+        public MoveableObjectEllipse(bool focusable, double CanvasWidth, double CanvasHeight, double Width, double Height) : base(focusable)
+        {
+            Ellipse ellipse = new Ellipse();
+            ellipse.Width = Width;
+            ellipse.Height = Height;
+            ellipse.Fill = new SolidColorBrush(Color.FromRgb((byte)R.Next(0, 255), (byte)R.Next(0, 255), (byte)R.Next(0, 255)));
+            double x = R.Next(0, (int)(CanvasWidth - ellipse.Width));
+            double y = R.Next(0, (int)(CanvasHeight - ellipse.Height));
+            ellipse.StrokeThickness = 1;
+            Canvas.SetLeft(ellipse, x);
+            Canvas.SetTop(ellipse, y);
+            Position.X = x;
+            Position.Y = y;
+            UIElement = ellipse;
+        }
     }
 }
