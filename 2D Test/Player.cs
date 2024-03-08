@@ -9,6 +9,10 @@ namespace _2D_Test
     internal class Player
     {
         MoveableObject MoveableObject { get; set; }
-        int Score;
+        int Score { get; set; } = 0;
+        public Player(MoveableObject moveableObject)
+        {
+            MoveableObject = moveableObject;
+        }
     }
 }

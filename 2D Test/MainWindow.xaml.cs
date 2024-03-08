@@ -1,9 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace _2D_Test
 {
@@ -84,8 +80,12 @@ namespace _2D_Test
                             if (moveableObject.IsSelected == false)
                             {
                                 moveableObject.Deccelerate();
+                                moveableObject.Move(MyCanvas, true);
                             }
-                            moveableObject.Move();
+                            else
+                            {
+                                moveableObject.Move(MyCanvas, false);
+                            }
                         }
                     });
                 }
