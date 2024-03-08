@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace _2D_Test
 {
@@ -16,8 +17,10 @@ namespace _2D_Test
         protected Random R = new();
         public UIElement UIElement { get; set; }
         public Vector Velocity = new();
-        public Vector Direction = new();
+        public Vector Position = new();
         public bool Focusable = false;
+        public bool IsSelected = false;
+        double MaxSpeed = 2.5;
         public MoveableObject()
         {
             UIElement = new UIElement();
@@ -32,13 +35,27 @@ namespace _2D_Test
             UIElement = new UIElement();
             Focusable = focusable;
         }
-        public void accelerate(Vector accelerationDirection)
+        public void Accelerate(Vector accelerationDirection)
         {
-
+            if(Velocity.Length < MaxSpeed || ((Velocity + accelerationDirection).Length < MaxSpeed))
+            Velocity += accelerationDirection;
         }
-        public void move()
+        public void Deccelerate()
         {
-
+            if (Velocity.X < 0)
+                Velocity.X += 0.01;
+            else if (Velocity.X > 0)
+                Velocity.X -= 0.01;
+            if (Velocity.Y < 0)
+                Velocity.Y += 0.01;
+            else if (Velocity.Y > 0)
+                Velocity.Y -= 0.01;
+        }
+        public void Move()
+        {
+            Position += Velocity;
+            Canvas.SetTop(UIElement, Position.Y);
+            Canvas.SetLeft(UIElement, Position.X);
         }
     }
 }

@@ -51,14 +51,16 @@ namespace _2D_Test
                     {
                         ((Ellipse)SelectedMoveableObject.UIElement).Stroke = Brushes.Transparent;
                     }
+                    SelectedMoveableObject.IsSelected = false;
                 }
                 SelectedMoveableObject = MoveableObjects.Where(mo => mo.UIElement == sender).Single();
-                if (SelectedMoveableObject != null)
+                if (SelectedMoveableObject != null && SelectedMoveableObject.Focusable == true)
                 {
                     if (SelectedMoveableObject.UIElement is Ellipse)
                     {
                         ((Ellipse)SelectedMoveableObject.UIElement).Stroke = Brushes.Black;
                     }
+                    SelectedMoveableObject.IsSelected = true;
                 }
             }
         }

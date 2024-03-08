@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace _2D_Test
 {
@@ -14,10 +15,7 @@ namespace _2D_Test
         Dictionary<Key, bool> pressedKeys = new();
         UIElement selectedElement = null;
         private bool running = true;
-        Vector velocity = new();
-        private double MaxSpeed = 5;
         Thread thread;
-        Random r = new();
         GameObjectMananger GameObjectMananger;
         public MainWindow()
         {
@@ -33,54 +31,63 @@ namespace _2D_Test
 
         public void GameLogic()
         {
-            Vector direction = new();
+            Vector direction;
             System.Diagnostics.Debug.WriteLine("Start Game Loop");
             while (true)
             {
-                direction = new();
                 if (running)
                 {
+                    direction = new();
                     if (pressedKeys[Key.Up] == true)
                     {
-                        velocity.Y -= 0.01;
+                        direction.Y -= 0.01;
                     }
                     else
                     {
-                        if(velocity.Y < 0)
-                            velocity.Y += 0.01;
+                        direction.Y += 0.01;
                     }
                     if (pressedKeys[Key.Down] == true)
                     {
-                        velocity.Y += 0.01;
+                        direction.Y += 0.01;
                     }
                     else
                     {
-                        if (velocity.Y > 0)
-                            velocity.Y -= 0.01;
+                        direction.Y -= 0.01;
                     }
                     if (pressedKeys[Key.Left] == true)
                     {
-                        velocity.X -= 0.01;
+                        direction.X -= 0.01;
                     }
                     else
                     {
-                        if (velocity.X < 0)
-                            velocity.X += 0.01;
+                        direction.X += 0.01;
                     }
                     if (pressedKeys[Key.Right] == true)
                     {
-                        velocity.X += 0.01;
+                        direction.X += 0.01;
                     }
                     else
                     {
-                        if (velocity.X > 0)
-                            velocity.X -= 0.01;
+                        direction.X -= 0.01;
                     }
-                    direction += velocity;
-                    if (selectedElement != null)
+                    if (GameObjectMananger.SelectedMoveableObject != null)
                     {
-                        Application.Current.Dispatcher.Invoke(() => Move(selectedElement, direction));
+                        if (direction.Length > 0)
+                            GameObjectMananger.SelectedMoveableObject.Accelerate(direction);
+                        else
+                            GameObjectMananger.SelectedMoveableObject.Deccelerate();
                     }
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        foreach (MoveableObjectEllipse moveableObject in GameObjectMananger.MoveableObjects)
+                        {
+                            if (moveableObject.IsSelected == false)
+                            {
+                                moveableObject.Deccelerate();
+                            }
+                            moveableObject.Move();
+                        }
+                    });
                 }
                 System.Threading.Thread.Sleep(10);
             }
@@ -136,14 +143,6 @@ namespace _2D_Test
                     e.Handled = true;
                     break;
             }
-        }
-
-        public static void Move(UIElement element, Vector direction)
-        {
-            double currentTop = Canvas.GetTop(element);
-            double currentLeft = Canvas.GetLeft(element);
-            Canvas.SetTop(element, currentTop + direction.Y);
-            Canvas.SetLeft(element, currentLeft + direction.X);
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)

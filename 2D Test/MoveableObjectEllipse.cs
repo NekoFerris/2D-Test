@@ -24,6 +24,8 @@ namespace _2D_Test
             ellipse.StrokeThickness = 1;
             Canvas.SetLeft(ellipse, x);
             Canvas.SetTop(ellipse, y);
+            Position.X = x; 
+            Position.Y = y;
             UIElement = ellipse;
         }
     }
