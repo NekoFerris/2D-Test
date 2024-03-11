@@ -8,7 +8,7 @@ namespace _2D_Test
 {
     internal class Player
     {
-        MoveableObject MoveableObject { get; set; }
+        private MoveableObject MoveableObject { get; set; }
         public string Name { get; } = "noname";
         int Score { get; set; } = 0;
         public Player(MoveableObject moveableObject)

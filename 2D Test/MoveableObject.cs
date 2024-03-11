@@ -25,7 +25,7 @@ namespace _2D_Test
         public Vector Position = new();
         public bool Focusable = false;
         public bool IsSelected = false;
-        public double Widht = 0;
+        public double Width = 0;
         public double Height = 0;
         double MaxSpeed = 5;
         public MoveableObject()
@@ -36,6 +36,7 @@ namespace _2D_Test
         {
             UIElement = new UIElement();
             Focusable = focusable;
+            Velocity = new(R.Next(-5,6), R.Next(-5, 6));
         }
         public MoveableObject(bool focusable, double CanvasWidth, double CanvasHeight)
         {
@@ -49,7 +50,7 @@ namespace _2D_Test
         }
         public void Deccelerate()
         {
-            if (Velocity.Length > 0.01)
+            if (Velocity.Length > 0.1)
                 Velocity = Vector.Multiply(Velocity, 0.999);
             else
                 Velocity = new();
@@ -64,7 +65,7 @@ namespace _2D_Test
                 Position.Y = 0;
                 if(bounce)
                 {
-                    BunceVelocity(Direction.Vertical);
+                    BunceEdge(Direction.Vertical);
                 }
                 else
                 {
@@ -76,7 +77,7 @@ namespace _2D_Test
                 Position.Y = GameCanvas.ActualHeight - Height;
                 if (bounce)
                 {
-                    BunceVelocity(Direction.Vertical);
+                    BunceEdge(Direction.Vertical);
                 }
                 else
                 {
@@ -89,19 +90,19 @@ namespace _2D_Test
                 Position.X = 0;
                 if (bounce)
                 {
-                    BunceVelocity(Direction.Horizontal);
+                    BunceEdge(Direction.Horizontal);
                 }
                 else
                 {
                     Velocity.X = 0;
                 }
             }
-            else if (Position.X > GameCanvas.ActualWidth - Widht)
+            else if (Position.X > GameCanvas.ActualWidth - Width)
             {
-                Position.X = GameCanvas.ActualWidth - Widht;
+                Position.X = GameCanvas.ActualWidth - Width;
                 if (bounce)
                 {
-                    BunceVelocity(Direction.Horizontal);
+                    BunceEdge(Direction.Horizontal);
                 }
                 else
                 {
@@ -111,7 +112,7 @@ namespace _2D_Test
             Canvas.SetTop(UIElement, Position.Y);
             Canvas.SetLeft(UIElement, Position.X);
         }
-        public void BunceVelocity(Direction direction)
+        public void BunceEdge(Direction direction)
         {
             if(direction == Direction.Vertical)
             {
@@ -121,6 +122,11 @@ namespace _2D_Test
             {
                 Velocity.X *= -1;
             }
+        }
+
+        public static void Collide(MoveableObject source, MoveableObject collider)
+        {
+
         }
     }
 }

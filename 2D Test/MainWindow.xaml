@@ -8,7 +8,7 @@
         Title="2D Test" Height="720" Width="1280" ResizeMode="NoResize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
     <Grid>
         <Canvas x:Name="MyCanvas" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnAdd" Content="Hinzufügen" Margin="0,0,85,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="btnAdd_Click" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnRem" Content="Entfernen" Margin="0,0,10,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="70" Click="btnRem_Click" Grid.Column="1"/>
+        <Button x:Name="btnAdd" Content="Hinzufügen" Margin="0,0,85,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="BtnAdd_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnRem" Content="Entfernen" Margin="0,0,10,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="70" Click="BtnRem_Click" Grid.Column="1"/>
     </Grid>
 </Window>
