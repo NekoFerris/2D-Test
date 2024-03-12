@@ -73,7 +73,7 @@ namespace _2D_Test
                         else
                             GameObjectMananger.SelectedMoveableObject.Deccelerate();
                     }
-                    GameObjectMananger.Move(MyCanvas);
+                    Application.Current.Dispatcher.Invoke(() => GameObjectMananger.Move(MyCanvas));
                 }
                 System.Threading.Thread.Sleep(10);
             }

@@ -62,22 +62,20 @@ namespace _2D_Test
 
         public void Move(Canvas canvas)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            foreach (MoveableObjectEllipse moveableObject in MoveableObjects)
             {
-                foreach (MoveableObjectEllipse moveableObject in MoveableObjects)
+                if (moveableObject.IsSelected == false)
                 {
-                    if (moveableObject.IsSelected == false)
-                    {
-                        moveableObject.Deccelerate();
-                        CheckCollision(moveableObject);
-                        moveableObject.Move(canvas, true);
-                    }
-                    else
-                    {
-                        moveableObject.Move(canvas, false);
-                    }
+                    moveableObject.Deccelerate();
+                    CheckCollision(moveableObject);
+                    moveableObject.Move(canvas, true);
                 }
-            });
+                else
+                {
+                    moveableObject.Move(canvas, false);
+                }
+                moveableObject.Draw();
+            }
         }
 
         public bool CheckCollision(MoveableObject source)
@@ -93,17 +91,33 @@ namespace _2D_Test
                             return;
                         else
                         {
-                            double distance = Math.Sqrt(Math.Pow(source.Position.X - mo.Position.X, 2)
-                                                    + Math.Pow(source.Position.Y - mo.Position.Y, 2));
-                            double combinedRadii = (source.Width + mo.Width) / 2;
-                            if (distance < combinedRadii * 1.2)
+                            double r1 = ((Ellipse)source.UIElement).ActualWidth / 2;
+                            double x1 = source.Position.X + r1;
+                            double y1 = source.Position.Y + r1;
+                            double r2 = ((Ellipse)mo.UIElement).ActualWidth / 2;
+                            double x2 = mo.Position.X + r2;
+                            double y2 = mo.Position.Y + r2;
+                            Vector d = new Vector(x2 - x1, y2 - y1);
+                            if (d.Length <= r1 + r2)
                             {
-                                if(mo.Velocity.Length > 0)
+                                if (mo.Velocity.Length > 0)
                                 {
                                     double angle = Vector.AngleBetween(source.Velocity, mo.Velocity);
                                     var ca = Math.Cos(angle);
                                     var sa = Math.Sin(angle);
                                     source.Velocity = new Vector(ca * source.Velocity.X - sa * source.Velocity.Y, sa * source.Velocity.X + ca * source.Velocity.Y);
+                                    mo.Velocity = new Vector(ca * source.Velocity.X - sa * source.Velocity.Y, sa * source.Velocity.X + ca * source.Velocity.Y);
+
+                                    //while (d.Length <= r1 + r2)
+                                    //{
+                                    //    x1 = source.Position.X + r1;
+                                    //    y1 = source.Position.Y + r1;
+                                    //    x2 = mo.Position.X + r2;
+                                    //    y2 = mo.Position.Y + r2;
+                                    //    d = new Vector(x2 - x1, y2 - y1);
+                                    //    source.Move(GameCanvas, true);
+                                    //    mo.Move(GameCanvas, true);
+                                    //}
                                 }
                                 else
                                 {
@@ -112,7 +126,15 @@ namespace _2D_Test
                                     var ca = Math.Cos(angle);
                                     var sa = Math.Sin(angle);
                                     source.Velocity = new Vector(ca * source.Velocity.X - sa * source.Velocity.Y, sa * source.Velocity.X + ca * source.Velocity.Y);
-
+                                    //while (d.Length <= r1 + r2)
+                                    //{
+                                    //    x1 = source.Position.X + r1;
+                                    //    y1 = source.Position.Y + r1;
+                                    //    x2 = mo.Position.X + r2;
+                                    //    y2 = mo.Position.Y + r2;
+                                    //    d = new Vector(x2 - x1, y2 - y1);
+                                    //    source.Move(GameCanvas, true);
+                                    //}
                                 }
                                 collission = true;
                                 state.Break();

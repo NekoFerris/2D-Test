@@ -22,7 +22,7 @@ namespace _2D_Test
         protected Random R = new();
         public UIElement UIElement { get; set; }
         public Vector Velocity = new();
-        public Vector Position = new();
+        public Point Position = new();
         public bool Focusable = false;
         public bool IsSelected = false;
         public double Width = 0;
@@ -109,8 +109,6 @@ namespace _2D_Test
                     Velocity.X = 0;
                 }
             }
-            Canvas.SetTop(UIElement, Position.Y);
-            Canvas.SetLeft(UIElement, Position.X);
         }
         public void BunceEdge(Direction direction)
         {
@@ -124,9 +122,10 @@ namespace _2D_Test
             }
         }
 
-        public static void Collide(MoveableObject source, MoveableObject collider)
+        public void Draw()
         {
-
+            Canvas.SetTop(UIElement, Position.Y);
+            Canvas.SetLeft(UIElement, Position.X);
         }
     }
 }
