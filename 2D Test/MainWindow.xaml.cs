@@ -133,7 +133,7 @@ namespace _2D_Test
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            GameObjectMananger.AddMoveableObject(true);
+            GameObjectMananger.AddMoveableObject(Type.Ellipse, true);
         }
         private void BtnRem_Click(object sender, RoutedEventArgs e)
         {

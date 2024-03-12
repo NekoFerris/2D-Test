@@ -9,19 +9,42 @@ namespace _2D_Test
     internal class GameObjectMananger
     {
         Canvas GameCanvas;
+        Random R;
         public List<MoveableObject> MoveableObjects = [];
         public MoveableObject? SelectedMoveableObject { get; set; } = null;
         public GameObjectMananger(Canvas canvas)
         {
             GameCanvas = canvas;
+            R = new();
         }
-        public void AddMoveableObject()
+        public void AddMoveableObject(Type type)
         {
-            AddMoveableObject(false);
+            AddMoveableObject(Type.Ellipse, false);
         }
-        public void AddMoveableObject(bool focusable)
+        public void AddMoveableObject(Type type, bool focusable)
         {
-            MoveableObjects.Add(new MoveableObjectEllipse(true, GameCanvas.ActualWidth, GameCanvas.ActualHeight));
+            Double width = R.Next(10, 61);
+            Double height = R.Next(10, 61);
+            AddMoveableObject(type, focusable, width, height);
+        }
+        public void AddMoveableObject(Type type, bool focusable, double width, double height)
+        {
+            double possX = R.Next(0, (int)(GameCanvas.ActualWidth - width));
+            double possY = R.Next(0, (int)(GameCanvas.ActualHeight - height));
+            AddMoveableObject(type, focusable, width, height, possX, possY);
+        }
+        public void AddMoveableObject(Type type, bool focusable, double width, double height, double possX, double possY)
+        {
+            switch (type)
+            {
+                case Type.Ellipse:
+                    MoveableObjects.Add(new MoveableObjectEllipse(focusable, possX, possY, width));
+                    break;
+                case Type.Rectangle:
+                    break;
+                default: 
+                    throw new NotImplementedException();
+            }
             GameCanvas.Children.Add(MoveableObjects.Last().UIElement);
             if (focusable)
             {
@@ -106,7 +129,7 @@ namespace _2D_Test
                                     var ca = Math.Cos(angle);
                                     var sa = Math.Sin(angle);
                                     source.Velocity = new Vector(ca * source.Velocity.X - sa * source.Velocity.Y, sa * source.Velocity.X + ca * source.Velocity.Y);
-                                    mo.Velocity = new Vector(ca * source.Velocity.X - sa * source.Velocity.Y, sa * source.Velocity.X + ca * source.Velocity.Y);
+                                    mo.Velocity = new Vector(ca * source.Velocity.Y - sa * source.Velocity.X, sa * source.Velocity.Y + ca * source.Velocity.X);
 
                                     //while (d.Length <= r1 + r2)
                                     //{

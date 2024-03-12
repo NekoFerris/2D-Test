@@ -15,6 +15,11 @@ enum Direction
     Vertical,
     Horizontal
 }
+enum Type
+{
+    Ellipse,
+    Rectangle
+}
 namespace _2D_Test
 {
     internal class MoveableObject
