@@ -1,9 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace _2D_Test
 {
@@ -12,7 +8,7 @@ namespace _2D_Test
     /// </summary>
     public partial class MainWindow : Window
     {
-        Dictionary<Key, bool> pressedKeys = new();
+        Dictionary<Key, bool> pressedKeys = [];
         UIElement selectedElement = null;
         private bool running = true;
         Thread thread;
@@ -77,17 +73,7 @@ namespace _2D_Test
                         else
                             GameObjectMananger.SelectedMoveableObject.Deccelerate();
                     }
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        foreach (MoveableObjectEllipse moveableObject in GameObjectMananger.MoveableObjects)
-                        {
-                            if (moveableObject.IsSelected == false)
-                            {
-                                moveableObject.Deccelerate();
-                            }
-                            moveableObject.Move();
-                        }
-                    });
+                    Application.Current.Dispatcher.Invoke(() => GameObjectMananger.Move(MyCanvas));
                 }
                 System.Threading.Thread.Sleep(10);
             }
@@ -145,11 +131,11 @@ namespace _2D_Test
             }
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             GameObjectMananger.AddMoveableObject(true);
         }
-        private void btnRem_Click(object sender, RoutedEventArgs e)
+        private void BtnRem_Click(object sender, RoutedEventArgs e)
         {
             GameObjectMananger.RemoveMoveableObject();
         }
