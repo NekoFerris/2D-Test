@@ -23,8 +23,8 @@ namespace _2D_Test
         }
         public void AddMoveableObject(Type type, bool focusable)
         {
-            Double width = R.Next(10, 61);
-            Double height = R.Next(10, 61);
+            Double width = R.Next(5, 10);
+            Double height = R.Next(5, 10);
             AddMoveableObject(type, focusable, width, height);
         }
         public void AddMoveableObject(Type type, bool focusable, double width, double height)
