@@ -17,9 +17,13 @@ namespace _2D_Test
             GameCanvas = canvas;
             R = new();
         }
-        public void AddMoveableObject(Type type)
+        public void AddMoveableObject()
         {
             AddMoveableObject(Type.Ellipse, false);
+        }
+        public void AddMoveableObject(bool focusable)
+        {
+            AddMoveableObject(Type.Ellipse, focusable);
         }
         public void AddMoveableObject(Type type, bool focusable)
         {
@@ -130,17 +134,6 @@ namespace _2D_Test
                                     var sa = Math.Sin(angle);
                                     source.Velocity = new Vector(ca * source.Velocity.X - sa * source.Velocity.Y, sa * source.Velocity.X + ca * source.Velocity.Y);
                                     mo.Velocity = new Vector(ca * source.Velocity.Y - sa * source.Velocity.X, sa * source.Velocity.Y + ca * source.Velocity.X);
-
-                                    //while (d.Length <= r1 + r2)
-                                    //{
-                                    //    x1 = source.Position.X + r1;
-                                    //    y1 = source.Position.Y + r1;
-                                    //    x2 = mo.Position.X + r2;
-                                    //    y2 = mo.Position.Y + r2;
-                                    //    d = new Vector(x2 - x1, y2 - y1);
-                                    //    source.Move(GameCanvas, true);
-                                    //    mo.Move(GameCanvas, true);
-                                    //}
                                 }
                                 else
                                 {
@@ -149,15 +142,6 @@ namespace _2D_Test
                                     var ca = Math.Cos(angle);
                                     var sa = Math.Sin(angle);
                                     source.Velocity = new Vector(ca * source.Velocity.X - sa * source.Velocity.Y, sa * source.Velocity.X + ca * source.Velocity.Y);
-                                    //while (d.Length <= r1 + r2)
-                                    //{
-                                    //    x1 = source.Position.X + r1;
-                                    //    y1 = source.Position.Y + r1;
-                                    //    x2 = mo.Position.X + r2;
-                                    //    y2 = mo.Position.Y + r2;
-                                    //    d = new Vector(x2 - x1, y2 - y1);
-                                    //    source.Move(GameCanvas, true);
-                                    //}
                                 }
                                 collission = true;
                                 state.Break();
