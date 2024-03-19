@@ -6,17 +6,13 @@ using System.Windows.Shapes;
 
 namespace _2D_Test
 {
-    internal class GameObjectMananger
+    internal class GameObjectMananger(Canvas canvas)
     {
-        Canvas GameCanvas;
-        Random R;
+        Canvas GameCanvas = canvas;
+        Random R = new();
         public List<MoveableObject> MoveableObjects = [];
         public MoveableObject? SelectedMoveableObject { get; set; } = null;
-        public GameObjectMananger(Canvas canvas)
-        {
-            GameCanvas = canvas;
-            R = new();
-        }
+
         public void AddMoveableObject()
         {
             AddMoveableObject(Type.Ellipse, false);
@@ -107,10 +103,9 @@ namespace _2D_Test
 
         public bool CheckCollision(MoveableObject source)
         {
-            if (source.UIElement is Ellipse && source.Velocity.Length > 0)
+            if (source.UIElement is Ellipse ellipse && source.Velocity.Length > 0)
             {
                 bool collission = false;
-                Ellipse ellipse1 = (Ellipse)source.UIElement;
                 Parallel.ForEach(MoveableObjects, (mo, state) =>
                 {
                     if (MoveableObjects.Count > 1)
@@ -118,13 +113,13 @@ namespace _2D_Test
                             return;
                         else
                         {
-                            double r1 = ((Ellipse)source.UIElement).ActualWidth / 2;
+                            double r1 = ellipse.ActualWidth / 2;
                             double x1 = source.Position.X + r1;
                             double y1 = source.Position.Y + r1;
                             double r2 = ((Ellipse)mo.UIElement).ActualWidth / 2;
                             double x2 = mo.Position.X + r2;
                             double y2 = mo.Position.Y + r2;
-                            Vector d = new Vector(x2 - x1, y2 - y1);
+                            Vector d = new(x2 - x1, y2 - y1);
                             if (d.Length <= r1 + r2)
                             {
                                 if (mo.Velocity.Length > 0)
