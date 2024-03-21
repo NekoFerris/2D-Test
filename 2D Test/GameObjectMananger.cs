@@ -128,7 +128,7 @@ namespace _2D_Test
                                     var ca = Math.Cos(angle);
                                     var sa = Math.Sin(angle);
                                     source.Velocity = new Vector(ca * source.Velocity.X - sa * source.Velocity.Y, sa * source.Velocity.X + ca * source.Velocity.Y);
-                                    mo.Velocity = new Vector(ca * source.Velocity.Y - sa * source.Velocity.X, sa * source.Velocity.Y + ca * source.Velocity.X);
+                                    //mo.Velocity = new Vector(ca * source.Velocity.Y - sa * source.Velocity.X, sa * source.Velocity.Y + ca * source.Velocity.X);
                                 }
                                 else
                                 {

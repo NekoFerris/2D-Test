@@ -55,10 +55,10 @@ namespace _2D_Test
         }
         public void Deccelerate()
         {
-            if (Velocity.Length > 0.1)
-                Velocity = Vector.Multiply(Velocity, 0.999);
-            else
-                Velocity = new();
+            //if (Velocity.Length > 0.1)
+            //    Velocity = Vector.Multiply(Velocity, 0.999);
+            //else
+            //    Velocity = new();
         }
         public void Move(Canvas GameCanvas, bool bounce)
         {

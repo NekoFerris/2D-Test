@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2D_Test"
         mc:Ignorable="d"
-        Title="2D Test" Height="720" Width="1280" ResizeMode="NoResize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
+        Title="2D Test" Height="720" Width="1280" ResizeMode="NoResize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" Closing="Window_Closing">
     <Grid>
         <Canvas x:Name="MyCanvas" Grid.ColumnSpan="2"/>
         <Button x:Name="btnAdd" Content="Hinzufügen" Margin="0,0,85,10" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="BtnAdd_Click" Grid.ColumnSpan="2"/>
