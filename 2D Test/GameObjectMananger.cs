@@ -12,7 +12,6 @@ namespace _2D_Test
         Random R = new();
         public List<MoveableObject> MoveableObjects = [];
         public MoveableObject? SelectedMoveableObject { get; set; } = null;
-
         public void AddMoveableObject()
         {
             AddMoveableObject(Type.Ellipse, false);
@@ -85,7 +84,7 @@ namespace _2D_Test
 
         public void Move(Canvas canvas)
         {
-            foreach (MoveableObjectEllipse moveableObject in MoveableObjects)
+            foreach (MoveableObject moveableObject in MoveableObjects)
             {
                 if (moveableObject.IsSelected == false)
                 {
@@ -128,7 +127,6 @@ namespace _2D_Test
                                     var ca = Math.Cos(angle);
                                     var sa = Math.Sin(angle);
                                     source.Velocity = new Vector(ca * source.Velocity.X - sa * source.Velocity.Y, sa * source.Velocity.X + ca * source.Velocity.Y);
-                                    //mo.Velocity = new Vector(ca * source.Velocity.Y - sa * source.Velocity.X, sa * source.Velocity.Y + ca * source.Velocity.X);
                                 }
                                 else
                                 {

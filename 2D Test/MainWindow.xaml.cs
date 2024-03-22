@@ -75,6 +75,7 @@ namespace _2D_Test
                 Application.Current.Dispatcher.Invoke(() => gameObjectMananger.Move(MyCanvas));
                 System.Threading.Thread.Sleep(10);
             }
+            System.Diagnostics.Debug.WriteLine("Stop Game Loop");
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -102,7 +103,6 @@ namespace _2D_Test
                     break;
             }
         }
-
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -128,7 +128,6 @@ namespace _2D_Test
                     break;
             }
         }
-
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             gameObjectMananger.AddMoveableObject(Type.Ellipse, true);
@@ -137,7 +136,6 @@ namespace _2D_Test
         {
             gameObjectMananger.RemoveMoveableObject();
         }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             cancellationTokenSource.Cancel();

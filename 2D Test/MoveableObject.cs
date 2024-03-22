@@ -32,7 +32,7 @@ namespace _2D_Test
         public bool IsSelected = false;
         public double Width = 0;
         public double Height = 0;
-        double MaxSpeed = 5;
+        private double MaxSpeed = 5;
         public MoveableObject()
         {
             UIElement = new UIElement();
@@ -43,11 +43,6 @@ namespace _2D_Test
             Focusable = focusable;
             Velocity = new(R.Next(-5,6), R.Next(-5, 6));
         }
-        public MoveableObject(bool focusable, double CanvasWidth, double CanvasHeight)
-        {
-            UIElement = new UIElement();
-            Focusable = focusable;
-        }
         public void Accelerate(Vector accelerationDirection)
         {
             if(Velocity.Length < MaxSpeed || ((Velocity + accelerationDirection).Length < MaxSpeed))
@@ -55,10 +50,10 @@ namespace _2D_Test
         }
         public void Deccelerate()
         {
-            //if (Velocity.Length > 0.1)
-            //    Velocity = Vector.Multiply(Velocity, 0.999);
-            //else
-            //    Velocity = new();
+            if (Velocity.Length > 0.1)
+                Velocity = Vector.Multiply(Velocity, 0.999);
+            else
+                Velocity = new();
         }
         public void Move(Canvas GameCanvas, bool bounce)
         {
