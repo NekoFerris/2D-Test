@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace _2D_Test
+namespace Pong
 {
     internal class MoveableObjectEllipse : MoveableObject
     {

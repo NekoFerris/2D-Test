@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace _2D_Test
+namespace Pong
 {
     internal class GameObjectMananger(Canvas canvas)
     {

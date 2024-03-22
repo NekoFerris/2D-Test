@@ -1,4 +1,4 @@
-﻿namespace _2D_Test
+﻿namespace Pong
 {
     internal class Player
     {

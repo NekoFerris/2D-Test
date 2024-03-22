@@ -2,7 +2,7 @@
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
-namespace _2D_Test
+namespace Pong
 {
     internal class MoveableObjectRectangle : MoveableObject
     {

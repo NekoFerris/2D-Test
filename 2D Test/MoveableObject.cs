@@ -20,7 +20,7 @@ enum Type
     Ellipse,
     Rectangle
 }
-namespace _2D_Test
+namespace Pong
 {
     internal class MoveableObject
     {
